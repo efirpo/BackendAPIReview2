@@ -68,8 +68,32 @@ namespace PetShelter.Controllers
     [HttpPut("{id}")]
     public void Put(int id, [FromBody] Cat cat)
     {
-      cat.CatId = id;
-      _db.Entry(cat).State = EntityState.Modified;
+      var thisCat = _db.Cats.FirstOrDefault(d => d.CatId == id);
+      if (cat.Name != null)
+      {
+        thisCat.Name = cat.Name;
+      }
+      if (cat.Age != null)
+      {
+        thisCat.Age = cat.Age;
+      }
+      if (cat.Breed != null)
+      {
+        thisCat.Breed = cat.Breed;
+      }
+      var zeroDate = new DateTime();
+      if (cat.Admitted.Equals(zeroDate))
+      {
+      }
+      else
+      {
+        thisCat.Admitted = cat.Admitted;
+      }
+      if (cat.Notes != null)
+      {
+        thisCat.Notes = cat.Notes;
+      }
+      _db.Entry(thisCat).State = EntityState.Modified;
       _db.SaveChanges();
     }
 

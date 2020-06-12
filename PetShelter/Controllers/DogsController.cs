@@ -68,8 +68,32 @@ namespace PetShelter.Controllers
 
     public void Put(int id, [FromBody] Dog dog)
     {
-      dog.DogId = id;
-      _db.Entry(dog).State = EntityState.Modified;
+      var thisDog = _db.Dogs.FirstOrDefault(d => d.DogId == id);
+      if (dog.Name != null)
+      {
+        thisDog.Name = dog.Name;
+      }
+      if (dog.Age != null)
+      {
+        thisDog.Age = dog.Age;
+      }
+      if (dog.Breed != null)
+      {
+        thisDog.Breed = dog.Breed;
+      }
+      var zeroDate = new DateTime();
+      if (dog.Admitted.Equals(zeroDate))
+      {
+      }
+      else
+      {
+        thisDog.Admitted = dog.Admitted;
+      }
+      if (dog.Notes != null)
+      {
+        thisDog.Notes = dog.Notes;
+      }
+      _db.Entry(thisDog).State = EntityState.Modified;
       _db.SaveChanges();
     }
 
