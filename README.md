@@ -15,17 +15,17 @@ A simple API created to test knowledge of backend API functions and ability to i
 3. If you do not have MySQL Community Server installed, go to https://www.learnhowtoprogram.com/c-and-net/getting-started-with-c/installing-and-configuring-mysql and follow along with the instructions for your operating system.
 4. In your terminal, navigate to the main project directory("`PetShelter/`"), and create an appsettings file by using the command `touch appsettings.json`.
 5. Populate `appsettings.json` with the following code:
-- `{
-  "Logging": {
-    "LogLevel": {
-      "Default": "Warning"
-    }
-  },
-  "AllowedHosts": "*",
-  "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Port=3306;database=pet_shelter;uid=root;pwd=[YourPasswordHere];"
-  }
-  }`
+  `{
+  "Logging": {  
+    "LogLevel": {  
+      "Default": "Warning"  
+    }  
+  },  
+  "AllowedHosts": "*",  
+  "ConnectionStrings": {  
+    "DefaultConnection": "Server=localhost;Port=3306;database=pet_shelter;uid=root;pwd=[YourPasswordHere];"  
+  }  
+  }`  
   6. Replace `[YourPasswordHere]` within `appsettings.json` with the password you created for MySql in step 3.
   7. While still navigated to the `PetShelter` directory, type `dotnet ef database update` in your terminal to create and populate a new pet_shelter database.
   8. While still navigated to the `PetShelter/` directory, run the program by typing the command `dotnet run` in your terminal.
