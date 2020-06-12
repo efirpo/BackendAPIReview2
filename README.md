@@ -27,7 +27,7 @@ A simple API created to test knowledge of backend API functions and ability to i
   }  
   }`  
   6. Replace `[YourPasswordHere]` within `appsettings.json` with the password you created for MySql in step 3.
-  7. While still navigated to the `PetShelter` directory, type `dotnet ef database update` in your terminal to create and populate a new pet_shelter database.
+  7. While still navigated to the `PetShelter/` directory, type `dotnet ef database update` in your terminal to create and populate a new pet_shelter database.
   8. While still navigated to the `PetShelter/` directory, run the program by typing the command `dotnet run` in your terminal.
 
   ## Technology
