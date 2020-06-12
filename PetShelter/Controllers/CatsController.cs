@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PetShelter.Models;
 
 namespace PetShelter.Controllers
@@ -28,6 +29,28 @@ namespace PetShelter.Controllers
       _db.SaveChanges();
     }
 
+    [HttpGet("{id}")]
+    public ActionResult<Cat> Get(int id)
+    {
+      var thisCat = _db.Cats.FirstOrDefault(c => c.CatId == id);
+      return thisCat;
+    }
+
+    [HttpPut("{id}")]
+    public void Put(int id, [FromBody] Cat cat)
+    {
+      cat.CatId = id;
+      _db.Entry(cat).State = EntityState.Modified;
+      _db.SaveChanges();
+    }
+
+    [HttpDelete("{id}")]
+    public void Delete(int id)
+    {
+      var thisCat = _db.Cats.FirstOrDefault(c => c.CatId == id);
+      _db.Cats.Remove(thisCat);
+      _db.SaveChanges();
+    }
 
 
   }
