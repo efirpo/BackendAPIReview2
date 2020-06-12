@@ -17,12 +17,6 @@ namespace PetShelter.Controllers
       _db = db;
     }
 
-    [HttpGet]
-    public ActionResult<IEnumerable<Cat>> Get()
-    {
-      return _db.Cats.ToList();
-    }
-
     [HttpGet("{id}")]
     public ActionResult<Cat> Get(int id)
     {
@@ -51,12 +45,16 @@ namespace PetShelter.Controllers
       {
         search = search.Where(cat => cat.Notes.ToLower().Contains(notes.ToLower()));
       }
-      if (admitted != new DateTime(0000, 00, 00))
+      var zeroDate = new DateTime();
+      if (admitted.Equals(zeroDate))
+      {
+      }
+      else
       {
         DateTime now = DateTime.Now;
-        TimeSpan elapsed = now.Subtract(admitted);
-        search = search.Where(cat => now.Subtract(admitted) < now.Subtract(cat.Admitted));
+        search = search.Where(cat => (now.Subtract(admitted)).TotalDays >= (now.Subtract(cat.Admitted)).TotalDays);
       }
+      return search.ToList();
     }
 
     [HttpPost]
