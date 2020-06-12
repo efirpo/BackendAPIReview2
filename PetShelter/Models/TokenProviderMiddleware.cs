@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.
 using Newtonsoft.Json;
 
 namespace PetShelter.CustomTokenAuthProvider
@@ -127,7 +128,7 @@ namespace PetShelter.CustomTokenAuthProvider
         throw new ArgumentNullException(nameof(TokenProviderOptions.SigningCredentials));
       }
 
-      if (options.NonceGenerator == null)
+      if (options.NonceGenerator() == null)
       {
         throw new ArgumentNullException(nameof(TokenProviderOptions.NonceGenerator));
       }

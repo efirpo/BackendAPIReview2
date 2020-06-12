@@ -9,6 +9,9 @@ using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Security.Claims;
+using System.Security.Principal;
+using Microsoft.Extensions.Options;
 using PetShelter.CustomTokenAuthProvider;
 
 
@@ -36,24 +39,11 @@ namespace PetShelter
       services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
       .AddJwtBearer(options =>
       {
-        options.Audience = "{Configuration.GetSection('TokenAuthentication:Audience')}";
-        options. = "{Configuration.GetSection('TokenAuthentication:Issuer')}";
 
-      })
+      });
     }
-    public void ConfigureAuth(IApplicationBuilder app)
-    {
-      var signingkey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("TokenAuthentication:SecretKey").Value));
-      var tokenProviderOptions = new TokenProviderOptions
-      {
-        Path = Configuration.GetSection("TokenAuthentication:TokenPath").Value,
-        Audience = Configuration.GetSection("TokenAuthentication:Audience").Value,
-        Issuer = Configuration.GetSection("TokenAuthentication:Issuer").Value,
-        SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256),
-        IdentityResolver = GetIdentity
-      }
-    
-}
+
+
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
     {
